@@ -30,14 +30,15 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '22'   # latest 22.x LTS — new enough for npm >= 11.5.1
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
 
-      # Trusted publishing (OIDC) needs npm >= 11.5.1, but Node 22.14.0 bundles
-      # npm 10.x — too old to detect the OIDC environment, so `npm publish` would
-      # silently fall back to (absent) token auth and 404. Upgrade npm first.
-      - run: npm install -g npm@latest
+      # Trusted publishing (OIDC) needs npm >= 11.5.1 to detect the OIDC
+      # environment; without it `npm publish` silently falls back to (absent)
+      # token auth and 404s. The bundled npm on current Node 22.x clears that
+      # bar, but pin the floor explicitly so a base-image change can't regress it.
+      - run: npm install -g npm@^11.5.1
 
       # Pick the package from the tag prefix: `the-ledger-v*` → packages/the-ledger,
       # `space-opera-v*` → packages/space-opera.
