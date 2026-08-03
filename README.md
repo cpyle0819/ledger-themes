@@ -28,6 +28,14 @@ You install only the theme you name — each package is independent, so a consum
 never pulls another theme's bytes. (`the-ledger` also pulls its ambient dependency,
 `smoke-drift`; `space-opera` currently ships no ambient.)
 
+## Adding your own theme
+
+A theme is an npm package carrying a `ledgerTheme` block — a `theme.css` that
+fills the token contract plus optional logo, ambient, sounds, and fonts. No build
+step, no change to The Ledger. See **[THEMES.md](THEMES.md)** for the full
+authoring guide: the token contract, the manifest, and the path from empty folder
+to published package.
+
 ## Developing
 
 This is an npm-workspaces monorepo.
