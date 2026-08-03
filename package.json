@@ -10,6 +10,9 @@
   "scripts": {
     "publish:all": "npm publish --workspaces --access public"
   },
+  "devDependencies": {
+    "@cpyle0819/ambience": "github:cpyle0819/ambience"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cpyle0819/ledger-themes.git"
