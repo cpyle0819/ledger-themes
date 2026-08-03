@@ -1,0 +1,18 @@
+{
+  "name": "ledger-themes",
+  "version": "0.0.0",
+  "description": "Themes for The Ledger — each a standalone, independently-publishable npm package.",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "publish:all": "npm publish --workspaces --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpyle0819/ledger-themes.git"
+  },
+  "license": "MIT"
+}
