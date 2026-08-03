@@ -1,6 +1,6 @@
 {
   "name": "@cpyle0819/ledger-theme-the-ledger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "The Ledger's original theme: leather, parchment, brass, and a wax seal. The bundled reference theme.",
   "type": "module",
   "files": [
@@ -25,7 +25,11 @@
     "sounds": {
       "pageTurn": { "src": "./sounds/page-turn.ogg", "volume": 0.5, "startAt": 1.7 },
       "quill": { "src": "./sounds/quill.ogg", "volume": 0.45, "maxMs": 1400 }
-    }
+    },
+    "settings": [
+      { "target": "ambient", "attr": "fire", "type": "boolean", "label": "Firelight", "default": true },
+      { "target": "ambient", "attr": "wind", "type": "range", "label": "Draught", "min": 0, "max": 600, "step": 50, "default": 300 }
+    ]
   },
   "repository": {
     "type": "git",

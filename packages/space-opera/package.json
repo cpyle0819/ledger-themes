@@ -1,6 +1,6 @@
 {
   "name": "@cpyle0819/ledger-theme-space-opera",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A lived-in ship's-manifest theme for The Ledger: gunmetal data-plates, phosphor-cyan readouts, amber warnings, hazard accents — Expanse-cold.",
   "type": "module",
   "files": [
@@ -19,11 +19,16 @@
     "stylesheet": "./theme.css",
     "fonts": "https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Share+Tech+Mono&display=swap",
     "logo": { "tag": "space-opera-mark", "src": "./mark.js" },
-    "ambient": { "tag": "star-field", "src": "@cpyle0819/ambience/starfield", "attrs": { "color": "rgb(203 214 224)", "opacity": "0.85", "density": "44", "layers": "3", "debris": true, "planets": true, "flip": true } },
+    "ambient": { "tag": "star-field", "src": "@cpyle0819/ambience/starfield", "attrs": { "color": "rgb(203 214 224)", "opacity": "0.85", "density": "44", "layers": "3", "speed": 1500, "debris": true, "planets": true, "flip": true } },
     "sounds": {
       "pageTurn": { "src": "./sounds/hatch.wav", "volume": 0.4 },
       "quill": { "src": "./sounds/relay.wav", "volume": 0.4, "maxMs": 900 }
-    }
+    },
+    "settings": [
+      { "target": "ambient", "attr": "flip", "type": "boolean", "label": "Flip-and-burn", "default": true },
+      { "target": "ambient", "attr": "planets", "type": "boolean", "label": "Planets", "default": true },
+      { "target": "ambient", "attr": "speed", "type": "range", "label": "Cruise speed", "min": 500, "max": 3000, "step": 100, "default": 1500 }
+    ]
   },
   "repository": {
     "type": "git",
