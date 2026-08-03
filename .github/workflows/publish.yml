@@ -34,6 +34,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
 
+      # Trusted publishing (OIDC) needs npm >= 11.5.1, but Node 22.14.0 bundles
+      # npm 10.x — too old to detect the OIDC environment, so `npm publish` would
+      # silently fall back to (absent) token auth and 404. Upgrade npm first.
+      - run: npm install -g npm@latest
+
       # Pick the package from the tag prefix: `the-ledger-v*` → packages/the-ledger,
       # `space-opera-v*` → packages/space-opera.
       - name: Resolve package from tag
