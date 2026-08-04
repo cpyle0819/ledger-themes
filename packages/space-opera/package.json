@@ -1,6 +1,6 @@
 {
   "name": "@cpyle0819/ledger-theme-space-opera",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A lived-in ship's-manifest theme for The Ledger: gunmetal data-plates, phosphor-cyan readouts, amber warnings, hazard accents — Expanse-cold.",
   "type": "module",
   "files": [

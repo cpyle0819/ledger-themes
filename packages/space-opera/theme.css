@@ -143,11 +143,11 @@
   --card-radius:          4px;
   --deckle-filter:          none;   /* machined edge — no torn-paper displacement */
   --deckle-filter-selected: brightness(1.08) saturate(1.12);
-  /* Selected frame: a glowing cyan rule (no gilt), crisp — no deckle filter. */
-  --card-frame:
-    linear-gradient(135deg, #7fe8f2 0%, #58d7e6 40%, #2f9fb0 70%, #58d7e6 100%) 1;
-  --card-frame-filter: none;
-  --card-frame-seat:   inset 0 0 0 1px rgba(88,215,230,.4), 0 0 10px rgba(88,215,230,.25);
+  /* Selected frame: a glowing cyan inset (no gilt), with a soft outer glow. */
+  --card-frame-shadow:
+    inset 0 0 0 3px #58d7e6,
+    inset 0 0 0 4px rgba(88,215,230,.4),
+    0 0 10px rgba(88,215,230,.25);
   /* Closed stamp: an amber stencil rather than a wax seal; no deckle. */
   --stamp-ink:          rgba(240,168,56,.82);
   --stamp-edge:         rgba(240,168,56,.55);

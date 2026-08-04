@@ -133,12 +133,12 @@
   --card-radius:        0;                     /* torn paper has no rounded corner */
   --deckle-filter:      url(#ledger-deckle);   /* the torn-edge displacement       */
   --deckle-filter-selected: url(#ledger-deckle) brightness(1.07) saturate(1.12);
-  /* Selected card frame: a thick, ragged gold-leaf gild run through the deckle. */
-  --card-frame:
-    linear-gradient(125deg,
-      #f6e3a6 0%, #cfa544 14%, #8a641f 26%, #e7cf8e 34%, #a5791f 46%,
-      #6f4e17 58%, #d8b45e 70%, #8a641f 82%, #c79a3e 100%) 1;
-  --card-frame-seat:    inset 0 0 0 1px rgba(74,52,12,.5);
+  /* Selected card frame: a gold gild as an inset box-shadow on .paper, so it
+     tears with the deckle edge instead of sitting as a clean rectangle over it.
+     Stack: 4px gold inset, 1px dark keyline seating it. */
+  --card-frame-shadow:
+    inset 0 0 0 4px #cfa544,
+    inset 0 0 0 5px rgba(74,52,12,.5);
   /* Closed stamp inks (the corner CLOSED / NOT DONE wax stamp on a card). */
   --stamp-ink:          rgba(140,43,34,.7);
   --stamp-edge:         rgba(140,43,34,.58);
