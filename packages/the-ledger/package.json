@@ -1,7 +1,7 @@
 {
   "name": "@cpyle0819/ledger-theme-the-ledger",
-  "version": "1.2.0",
-  "description": "The Ledger's original theme: leather, parchment, brass, and a wax seal. The bundled reference theme.",
+  "version": "1.3.0",
+  "description": "The Ledger's original theme: leather, parchment, brass, and a tooled-leather cartouche. The bundled reference theme.",
   "type": "module",
   "files": [
     "theme.css",
@@ -19,7 +19,7 @@
     "tagline": "leather, parchment & brass",
     "subtitle": "an archive of <em>epics</em>, <em>stories</em> &amp; <em>tasks</em>",
     "stylesheet": "./theme.css",
-    "fonts": "https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap",
+    "fonts": "https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Caslon+Display&display=swap",
     "logo": { "tag": "ledger-mark", "src": "./mark.js" },
     "ambient": { "tag": "smoke-drift", "src": "@cpyle0819/ambience/smoke-drift", "attrs": { "color": "rgb(232 222 196)", "opacity": "0.5", "wind": "300", "fire": true } },
     "sounds": {
