@@ -1,6 +1,6 @@
 {
   "name": "@cpyle0819/ledger-theme-professional",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A clean, corporate-grade theme for The Ledger: neutral graphite palette, crisp white cards, one disciplined cobalt-blue accent, and the IBM Plex type system doing the work. Ships dark, with a light mode in the theme's gear (Appearance: Dark/Light). No texture, no animation, no foley — typography and whitespace are the design.",
   "type": "module",
   "files": [

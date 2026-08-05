@@ -47,13 +47,14 @@ class ProfessionalMark extends HTMLElement {
 
       <!-- Wordmark: THE LEDGER, IBM Plex Sans semibold, moderate tracking. A
            two-weight lockup would over-decorate; one weight, even color. The fill
-           reads the theme's --parch chrome-text token (inherits through the shadow
-           root), so it's light on the dark-mode chrome and dark on the light-mode
-           chrome automatically — one mark, both modes, no baked literal. The tile
-           and glyph are baked (cobalt + white read on either chrome). -->
+           reads the theme's --frame-text-strong chrome-text token (inherits through
+           the shadow root), which flips near-white on the dark-mode chrome to
+           near-black on the light-mode chrome — one mark, both modes, no baked
+           literal. The tile and glyph are baked (cobalt + white read on either
+           chrome). -->
       <g font-family="'IBM Plex Sans', 'Segoe UI', sans-serif" font-weight="600"
          font-size="30" letter-spacing="0.5" dominant-baseline="alphabetic">
-        <text class="pm-word" x="${wordX}" y="43" fill="var(--parch, #e8edf3)">THE LEDGER</text>
+        <text class="pm-word" x="${wordX}" y="43" fill="var(--frame-text-strong, #f4f3f6)">THE LEDGER</text>
       </g>`;
 
     const style = document.createElement('style');
