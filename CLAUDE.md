@@ -14,6 +14,15 @@ ship static `.css`/`.js`. The authoring contract lives in The Ledger's
 - `packages/the-ledger` — the leather-and-parchment reference theme (light card).
 - `packages/space-opera` — dark data-plate inversion; starfield ambient with
   flip-and-burn.
+- `packages/professional` — clean corporate theme: neutral graphite chrome, white
+  cards, IBM Plex type system, a single cobalt accent. No ambient, no sounds, flat
+  surfaces. Greys are true neutrals to stay distinct from space-opera's blue chrome.
+  Ships DARK; a light mode is a `mode` setting (`target: root`, writes
+  `data-mode` on <html>) rendered as an Appearance segmented control in the gear.
+  The `[data-mode="light"]` block in theme.css overrides only the chrome + canvas
+  tokens; cards/ink/tiers/accent are shared. This uses the `mode`/`root` setting
+  type added to the-ledger core (contract in theme.ts, control in ledger-settings,
+  pre-paint replay in index.html) — the first theme to drive a whole-app mode.
 
 ## Dependencies
 

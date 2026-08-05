@@ -15,6 +15,7 @@ web components (logo, ambient). See The Ledger's `CLAUDE.md` for the token contr
 |---|---|---|
 | [`@cpyle0819/ledger-theme-the-ledger`](packages/the-ledger) | The Ledger | Leather, parchment, brass, wax seal — the reference theme. |
 | [`@cpyle0819/ledger-theme-space-opera`](packages/space-opera) | Space Opera | Gunmetal data-plates, phosphor-cyan readouts, amber warnings — Expanse-cold. |
+| [`@cpyle0819/ledger-theme-professional`](packages/professional) | Professional | Graphite chrome, crisp white cards, IBM Plex type, one cobalt accent — corporate-clean. Dark by default with a light mode in the gear. |
 
 ## Using a theme
 

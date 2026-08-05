@@ -1,0 +1,329 @@
+/* Professional — a clean, corporate-grade theme for The Ledger.
+   A neutral graphite palette, crisp white cards, one disciplined cobalt-blue
+   accent, and the IBM Plex type system carrying the hierarchy. No texture, no
+   deckle, no gilt, no ambient drift, no foley — whitespace and type do the work.
+   The greys are true neutrals (no blue cast) so the theme reads distinct from the
+   blue-gunmetal space-opera sibling; cobalt is the single saturated hue.
+
+   TWO MODES, one theme, a full inversion between them. The default :root is a
+   TRUE DARK mode: dark chrome, dark elevated CARDS (one step lighter than the
+   canvas), and LIGHT ink on them. A `[data-mode="light"]` block near the end
+   flips every axis back — light chrome, white cards, DARK ink — the full
+   inversion, not just the chrome. The cobalt accent stays constant; the tier hues
+   lift for the dark card and re-mute for the white one. The mode is a user knob:
+   the manifest declares a `mode` setting on `target: root` with Dark/Light
+   options, the gear renders a segmented control, and the controller writes
+   `data-mode` onto <html> — the token cascade repaints the whole app in one
+   assignment. Dark is the `default`, so the theme ships dark; a user opts into light.
+
+   Reading the token contract: base.css uses the parch/brass slots as CHROME TEXT
+   (body { color: var(--parch) }; masthead, controls, column labels), and the
+   card/panel/sheet SURFACES come from separate recipe tokens (--card-surface,
+   --panel-surface, …) with --ink* as the text on them. So a mode flip moves two
+   independent groups: the chrome group (chrome bg + parch/brass text) and the card
+   group (surface + ink). In DARK both surfaces are dark with light text; in LIGHT
+   both go light with dark text. kb-0077: a dark card demands light ink, or
+   dark-on-dark text reads ~1.1:1 and is invisible — so --ink* MUST flip with the
+   surface, which is why the dark default carries light --ink and light mode
+   restores dark --ink.
+
+   Type: IBM Plex Sans (display + body) · IBM Plex Serif (masthead, optional
+   display) · IBM Plex Mono (ids, metadata). One designed family, three voices. */
+
+:root {
+  /* ---- Fonts ----
+     --fell is the display/heading face; the reference theme sets it serif, but a
+     corporate system leads with the sans and keeps the serif for the masthead.
+     --gara (body) and --fell both point at Plex Sans so the app reads as one
+     modern sans system; --caslon (masthead face) gets the Plex Serif. */
+  --fell:    'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fell-sc: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --gara:    'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --caslon:  'IBM Plex Serif', Georgia, serif;
+  --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- App chrome — NEUTRAL GRAPHITE (the "leather"/"wood" slots) ----
+     A warm-neutral graphite top bar and canvas, deliberately NO blue cast: the
+     sibling dark theme (space-opera) owns blue gunmetal, so this chrome stays a
+     true neutral grey to read as its own theme. Serious, neutral, not black. */
+  --leather:   #26252a;   /* masthead / control chrome                */
+  --leather-2: #302f35;
+  --wood:      #17161a;   /* darkest — canvas base / deep chrome       */
+
+  /* ---- Primary metal (the "brass" slots) — NEUTRAL greys ----
+     --brass-hi is the workhorse CHROME-TEXT token (column titles, counts, group
+     subheads, controls labels), so it stays a light neutral grey, NOT the accent.
+     Cobalt is reserved for the true accent tokens below (focus ring, active seg,
+     selected-card frame) so the one accent stays disciplined. Neutral, not blue,
+     to hold the graphite identity apart from the blue sibling theme. */
+  --brass:     #949197;   /* secondary chrome text, rules, placeholders */
+  --brass-lo:  #4d4b51;   /* borders, dividers on chrome                */
+  --brass-hi:  #cbc8ce;   /* primary chrome text — light neutral grey   */
+
+  /* ---- Parchment slots — here purely CHROME TEXT (light on dark chrome) ----
+     In this dark default the card surface is a dark elevated grey (recipe tokens
+     below), NOT these slots, so --parch* carry only chrome text: body copy, seg
+     labels, ident. They stay light. Light mode repoints them dark. */
+  --parch:      #e9e8eb;   /* primary chrome text on dark chrome        */
+  --parch-lo:   #b6b4bb;   /* secondary chrome text (seg, switch label) */
+  --parch-hi:   #f4f3f6;   /* strongest chrome text (hover, headings)   */
+  --parch-edge: rgba(255,255,255,.09);  /* hairline border on dark cards */
+
+  /* ---- Text on the card surface (the "ink" slots) — LIGHT on the dark card ----
+     A dark card demands light ink or it's invisible (dark-on-dark reads ~1.1:1).
+     These flip to near-white on the elevated card grey; light mode flips them
+     back to near-black. Each clears WCAG AA against the card surface below. */
+  --ink:       #eceaef;   /* near-white — primary reading text on card  */
+  --ink-soft:  #b3b1b9;   /* secondary text, metadata                  */
+  --ink-faint: #918f98;   /* faint text — clears AA (4.5) on the card   */
+  --ink-red:   #f2796d;   /* correction / error — readable red on dark  */
+
+  /* ---- Tier accents (seals) — MUTED so cobalt stays the only pop ----
+     Four low-saturation hues, distinct but quiet. None is a bright blue: the
+     cobalt accent is the single saturated signal in the UI (kb-0075 — a pop-out
+     works only when the rest of the field is calm), so the tiers read as a muted
+     categorical set, not competing accents. Task is a desaturated steel, clearly
+     apart from the cobalt accent. */
+  --seal-epic:   #9a8ae0;   /* lifted indigo — EPIC (reads on dark card) */
+  --seal-story:  #52b385;   /* lifted green — STORY                     */
+  --seal-task:   #7f93ad;   /* lifted steel — TASK                      */
+  --seal-bug:    #e5766b;   /* lifted red — BUG                         */
+  --wax:         #d9776b;   /* closed-stamp / seal tint                */
+
+  /* ---- Planning-risk tones (estimate vs. summed child effort) ---- */
+  --risk-over:   #c0392b;   /* over budget — red                       */
+  --risk-under:  #b7791f;   /* under budget — amber                    */
+
+  --fs-meta: 15px;
+
+  /* ---- Semantic helper tokens ----
+     The accent (COBALT BLUE) lives here, not in --brass-hi (which is chrome text).
+     Cobalt is the single confident corporate signal; the sibling dark theme uses
+     cyan, so this is a true blue, well clear of that hue. The focus ring is a
+     signature interaction — it MUST carry the accent, set explicitly. */
+  --focus-ring:         #4d7cff;            /* cobalt ring on dark chrome      */
+  --focus-ring-onlight: #2b57d4;            /* deeper cobalt ring on white     */
+  --skip-bg:            #4d7cff;            /* accent skip-link                */
+  --skip-fg:            #ffffff;
+  --btn-hover-fg:       #ffffff;
+  --chip-fg:            #ffffff;             /* text on a filled tier chip      */
+  --inert:             rgba(112,110,120,.85);/* abandoned / not-done grey       */
+  --accent-warm:       #4d7cff;              /* "direct on epic" lane label     */
+  --accent-warm-faint: rgba(77,124,255,.4);
+  --hover-wash:        rgba(255,255,255,.06);/* seg-button hover on dark chrome */
+  --row-hover:         rgba(255,255,255,.05); /* outline row hover on dark card  */
+  --copy-hover-bg:     rgba(255,255,255,.08);
+  --onlight-btn-bg:    rgba(255,255,255,.06);
+  --switch-on-2:       #2b57d4;              /* "show closed" on-state 2nd stop */
+  --closed-ink:        rgba(176,71,58,.9);   /* outline CLOSED tag              */
+  --closed-edge:       rgba(176,71,58,.55);
+  --abandoned-ink:     rgba(112,110,120,.9);
+  --abandoned-edge:    rgba(112,110,120,.5);
+  --seg-on-fg:         #ffffff;
+  --seg-on-bg:         linear-gradient(180deg, #5985ff, #3a63e6);
+
+  /* ---- Chrome seams: wells, hairlines, sheen on the graphite chrome ---- */
+  --well:              rgba(0,0,0,.30);        /* input / seg / select well     */
+  --well-soft:         rgba(0,0,0,.24);        /* the ident plate               */
+  --hairline:          rgba(148,145,151,.26);  /* controls-rail bottom border   */
+  --hairline-soft:     rgba(148,145,151,.20);  /* seg internal dividers         */
+  --chrome-sheen:      rgba(255,255,255,.05);  /* raised-button top line        */
+  --masthead-bg:       linear-gradient(180deg, rgba(255,255,255,.03), transparent 70%);
+  --masthead-rule:     linear-gradient(90deg, transparent, var(--brass-lo) 12%, var(--brass-hi) 50%, var(--brass-lo) 88%, transparent);
+  --controls-bg:       linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.12));
+  --app-bg:            #262528;
+
+  /* ---- Panel surface (outline epic cards, drawer, compose, toast) ----
+     Dark elevated grey, one step lighter than the #1b1a1e canvas, so panels read
+     as raised surfaces. Light mode flips these to white. */
+  --panel-radius:      8px;
+  --panel-surface:     #26252a;
+  --panel-head-wash:   linear-gradient(90deg, rgba(77,124,255,.10), transparent 52%);
+
+  /* ---- Large sheet surfaces (drawer, compose, about) — dark raised sheets ---- */
+  --sheet-surface:     #26252a;
+  --sheet-surface-tl:  #26252a;
+  --sheet-edge:        rgba(255,255,255,.10);
+
+  /* ---- Card surface recipe (the <ledger-card> slip) — dark elevated grey ----
+     A machined card, one step above the canvas: flat dark fill, small radius, a
+     faint light hairline (inset) for edge definition, and a shadow for lift.
+     Selected is a touch lighter still. --deckle-filter: none = no torn edge. */
+  --card-surface:          #26252a;
+  --card-surface-size:     auto;
+  --card-surface-blend:    normal;
+  --card-surface-selected: #2e2d33;
+  --card-shadow:           0 1px 2px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.30), inset 0 0 0 1px rgba(255,255,255,.06);
+  --card-shadow-hover:     0 3px 8px rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.10);
+  --card-shadow-selected:  0 6px 18px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.30);
+  --card-radius:           8px;
+  --deckle-filter:          none;
+  --deckle-filter-selected: none;
+  /* Selected card frame: a clean 2px cobalt keyline (brightened for the dark
+     ground), no gild, no deckle. */
+  --card-frame-shadow:
+    inset 0 0 0 2px #5985ff,
+    0 6px 18px rgba(0,0,0,.45);
+  /* Closed-stamp inks (the corner CLOSED / NOT DONE tag on a card) — lifted for
+     the dark card. */
+  --stamp-ink:          rgba(230,120,110,.8);
+  --stamp-edge:         rgba(230,120,110,.55);
+  --stamp-ink-abandoned: rgba(150,148,158,.75);
+  --stamp-edge-abandoned: rgba(150,148,158,.5);
+  --stamp-filter:       none;
+
+  /* ---- Editable-field + inset surfaces inside the shadow-DOM leaves ----
+     The drawer/compose sit on dark sheets, so fields are a recessed darker fill
+     with light ink (base.css's faint-white-on-dark is the right direction; these
+     pin concrete values that read on the #26252a sheet). */
+  --field-bg:        rgba(0,0,0,.22);
+  --field-bg-focus:  rgba(0,0,0,.30);
+  --field-edge:      rgba(255,255,255,.12);
+  --inset-bg:        rgba(0,0,0,.18);
+  --onlight-chip-bg: rgba(255,255,255,.07);
+}
+
+/* ---- Paint-only chrome: backdrop, grain, vignette, scrollbars ----
+   base.css leaves these as bare structure; the theme paints them. This theme is
+   deliberately flat — a subtle two-stop graphite canvas, a barely-there grain, no
+   vignette tunnel. Nothing animates. */
+
+/* App canvas: deep neutral graphite, one step BELOW the elevated card grey
+   (#26252a), with a faint cobalt top-light — a true dark mode where the dark
+   cards read as raised surfaces above the darker canvas. Warm-neutral greys (no
+   blue cast) hold the graphite identity; the single cobalt glow is the only hue.
+   Light mode repaints this rule at the end of the file. */
+ledger-board {
+  background:
+    radial-gradient(1100px 620px at 50% -10%, rgba(77,124,255,.06), transparent 60%),
+    linear-gradient(180deg, #1a191e, #141317);
+  background-color: #161519;
+}
+
+/* A whisper of noise to keep the flat graphite from banding — far fainter than the
+   reference theme's paper tooth. */
+.grain {
+  opacity: .025; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* No vignette — a corporate dashboard has even lighting. */
+.vignette { box-shadow: none; }
+
+/* Scrollbars — quiet steel, thin, on the graphite chrome. */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-thumb { background: var(--brass-lo); border-radius: 6px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--brass); background-clip: padding-box; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,.18); }
+
+/* ============================================================================
+   LIGHT MODE — [data-mode="light"] on <html>, written by the theme's `mode` knob.
+   The dark default (:root above) is a TRUE dark mode: dark chrome, dark elevated
+   cards, LIGHT ink. Light mode flips every one of those axes back — light chrome,
+   white cards, DARK ink — the full inversion, not just the chrome. The cobalt
+   accent and the tier hues are the two things that stay near-constant (the tiers
+   re-muted for the white ground). The [attr] selector outranks the bare :root, so
+   these win without !important.
+   ============================================================================ */
+:root[data-mode="light"] {
+  /* Chrome background — light neutral greys; the deepest (--wood) is the canvas
+     base, kept a touch cooler than the white cards so they still separate. */
+  --leather:   #f3f2f5;   /* masthead / control chrome                */
+  --leather-2: #eae9ed;
+  --wood:      #e4e3e7;   /* deepest chrome / canvas base              */
+
+  /* Chrome text (the "parch" slots) — now DARK, on the light chrome. */
+  --parch:     #2c2b30;   /* primary chrome text (body, ident)         */
+  --parch-lo:  #56555c;   /* secondary chrome text (seg, switch label) */
+  --parch-hi:  #1b1a1e;   /* strongest chrome text (hover, headings)   */
+  --parch-edge: #dcdade;  /* hairline border on the white card         */
+  --brass:     #6c6a73;   /* secondary chrome text, rules, placeholder */
+  --brass-lo:  #cfcdd3;   /* borders / dividers on light chrome        */
+  --brass-hi:  #34333a;   /* primary chrome text — column titles/counts*/
+
+  /* Ink on the card — flips back to near-black on the white card surface. */
+  --ink:       #232226;   /* primary reading text on the white card    */
+  --ink-soft:  #55535c;   /* secondary text, metadata                  */
+  --ink-faint: #6f6d77;   /* faint text — clears AA (4.5) on white      */
+  --ink-red:   #c0392b;   /* correction / error                        */
+
+  /* Tiers — re-muted for the white ground (the lifted dark-mode hues glare on
+     white). Matches the muted set from the light-first design. */
+  --seal-epic:   #6b5c9e;
+  --seal-story:  #3f8a63;
+  --seal-task:   #586a80;
+  --seal-bug:    #c0453a;
+  --wax:         #b0473a;
+
+  /* Surfaces flip back to white; borders/shadows to the light recipe. */
+  --panel-surface:     #ffffff;
+  --panel-head-wash:   linear-gradient(90deg, rgba(43,87,212,.06), transparent 52%);
+  --sheet-surface:     #ffffff;
+  --sheet-surface-tl:  #ffffff;
+  --sheet-edge:        #dcdade;
+  --card-surface:          #ffffff;
+  --card-surface-selected: #ffffff;
+  --card-shadow:           0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.10), inset 0 0 0 1px #dcdade;
+  --card-shadow-hover:     0 2px 6px rgba(16,24,40,.10), 0 4px 12px rgba(16,24,40,.10), inset 0 0 0 1px #c3ccd6;
+  --card-shadow-selected:  0 4px 14px rgba(43,87,212,.14), 0 2px 6px rgba(16,24,40,.10);
+  --card-frame-shadow:     inset 0 0 0 2px #2b57d4, 0 4px 14px rgba(43,87,212,.16);
+  --stamp-ink:          rgba(176,71,58,.7);
+  --stamp-edge:         rgba(176,71,58,.5);
+  --stamp-ink-abandoned: rgba(102,112,130,.7);
+  --stamp-edge-abandoned: rgba(102,112,130,.5);
+
+  /* Fields flip back to white-on-light with a light border. */
+  --field-bg:        #ffffff;
+  --field-bg-focus:  #ffffff;
+  --field-edge:      #dcdade;
+  --inset-bg:        #f6f5f7;
+  --onlight-chip-bg: rgba(35,34,38,.05);
+
+  /* Accent helpers whose alpha was tuned for the dark card flip back to dark tints. */
+  --row-hover:     rgba(43,87,212,.06);
+  --copy-hover-bg: rgba(43,87,212,.08);
+  --onlight-btn-bg: rgba(35,34,38,.05);
+
+  /* Chrome seams — flip the alpha from light-on-dark to dark-on-light so wells,
+     hairlines, and washes read on the light chrome. */
+  --well:          rgba(0,0,0,.05);          /* input / seg / select well     */
+  --well-soft:     rgba(0,0,0,.04);          /* the ident plate               */
+  --hairline:      rgba(0,0,0,.12);          /* controls-rail bottom border   */
+  --hairline-soft: rgba(0,0,0,.08);          /* seg internal dividers         */
+  --chrome-sheen:  rgba(0,0,0,.03);          /* raised-button top line        */
+  --masthead-bg:   linear-gradient(180deg, rgba(0,0,0,.02), transparent 70%);
+  --controls-bg:   linear-gradient(180deg, rgba(0,0,0,.035), rgba(0,0,0,.02));
+  --app-bg:        #e9e8ec;
+
+  /* Hover washes on the light chrome flip to a dark tint. */
+  --hover-wash:    rgba(0,0,0,.05);
+  --btn-hover-fg:  #1b1a1e;                   /* dark text on a hovered light button */
+
+  /* Focal-emphasis recede, LIGHT mode. The dark default (brightness .82) darkens a
+     card toward a dark ground — right for dark mode. Here the ground is PALE, so
+     darkening turns white peers muddy-grey while the active card stays bright,
+     reading as "everything dim but the active card". Instead fade peers TOWARD the
+     light canvas: full brightness, lower opacity so they wash into the pale ground,
+     slight desaturation. The active card stays opaque white and lifts by its cobalt
+     frame + shadow, so figure/ground still reads — but the field stays light. */
+  --card-recede:         saturate(.72);
+  --card-recede-opacity: .62;
+  --card-recede-hover:   saturate(1);
+}
+
+/* Light canvas: a pale neutral with the same faint cobalt top-light; the white
+   cards separate from it by brightness + shadow rather than colour. */
+[data-mode="light"] ledger-board {
+  background:
+    radial-gradient(1100px 620px at 50% -10%, rgba(77,124,255,.05), transparent 60%),
+    linear-gradient(180deg, #edecef, #e6e5e9);
+  background-color: #e9e8ec;
+}
+
+/* Grain would only muddy a light UI; drop it. */
+[data-mode="light"] .grain { opacity: 0; }
+
+/* Scrollbars on the light canvas — a mid grey thumb on a faint track. */
+[data-mode="light"] ::-webkit-scrollbar-thumb { background: #c3c1c8; }
+[data-mode="light"] ::-webkit-scrollbar-thumb:hover { background: #a9a7af; }
+[data-mode="light"] ::-webkit-scrollbar-track { background: rgba(0,0,0,.06); }

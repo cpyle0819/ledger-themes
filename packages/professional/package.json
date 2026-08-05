@@ -1,0 +1,31 @@
+{
+  "name": "@cpyle0819/ledger-theme-professional",
+  "version": "1.0.0",
+  "description": "A clean, corporate-grade theme for The Ledger: neutral graphite palette, crisp white cards, one disciplined cobalt-blue accent, and the IBM Plex type system doing the work. Ships dark, with a light mode in the theme's gear (Appearance: Dark/Light). No texture, no animation, no foley — typography and whitespace are the design.",
+  "type": "module",
+  "files": [
+    "theme.css",
+    "mark.js"
+  ],
+  "ledgerTheme": {
+    "id": "professional",
+    "name": "Professional",
+    "tagline": "typography & whitespace",
+    "subtitle": "a record of <em>epics</em>, <em>stories</em> &amp; <em>tasks</em>",
+    "stylesheet": "./theme.css",
+    "fonts": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap",
+    "logo": { "tag": "professional-mark", "src": "./mark.js" },
+    "settings": [
+      { "target": "root", "attr": "data-mode", "type": "mode", "label": "Appearance", "default": "dark", "options": [ { "value": "dark", "label": "Dark" }, { "value": "light", "label": "Light" } ] }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpyle0819/ledger-themes.git",
+    "directory": "packages/professional"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}
