@@ -1,6 +1,6 @@
 {
   "name": "@cpyle0819/ledger-theme-the-ledger",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "The Ledger's original theme: leather, parchment, brass, and a tooled-leather cartouche. The bundled reference theme.",
   "type": "module",
   "files": [

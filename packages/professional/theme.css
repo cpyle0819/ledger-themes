@@ -16,16 +16,16 @@
    `data-mode` onto <html> — the token cascade repaints the whole app in one
    assignment. Dark is the `default`, so the theme ships dark; a user opts into light.
 
-   Reading the token contract: base.css uses the parch/brass slots as CHROME TEXT
-   (body { color: var(--parch) }; masthead, controls, column labels), and the
-   card/panel/sheet SURFACES come from separate recipe tokens (--card-surface,
-   --panel-surface, …) with --ink* as the text on them. So a mode flip moves two
-   independent groups: the chrome group (chrome bg + parch/brass text) and the card
-   group (surface + ink). In DARK both surfaces are dark with light text; in LIGHT
-   both go light with dark text. kb-0077: a dark card demands light ink, or
-   dark-on-dark text reads ~1.1:1 and is invisible — so --ink* MUST flip with the
-   surface, which is why the dark default carries light --ink and light mode
-   restores dark --ink.
+   Reading the token contract: base.css uses --frame-text* / --metal* as CHROME
+   TEXT (body { color: var(--frame-text) }; masthead, controls, column labels),
+   and the card/panel/sheet SURFACES come from separate recipe tokens
+   (--card-surface, --panel-surface, …) with --text* as the text on them. So a
+   mode flip moves two independent groups: the chrome group (chrome bg +
+   frame-text/metal) and the card group (surface + text). In DARK both surfaces
+   are dark with light text; in LIGHT both go light with dark text. A dark card
+   demands light text, or dark-on-dark reads ~1.1:1 and is invisible — so --text*
+   MUST flip with the surface, which is why the dark default carries light --text
+   and light mode restores dark --text.
 
    Type: IBM Plex Sans (display + body) · IBM Plex Serif (masthead, optional
    display) · IBM Plex Mono (ids, metadata). One designed family, three voices. */
@@ -42,41 +42,41 @@
   --caslon:  'IBM Plex Serif', Georgia, serif;
   --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  /* ---- App chrome — NEUTRAL GRAPHITE (the "leather"/"wood" slots) ----
+  /* ---- App chrome — NEUTRAL GRAPHITE (--frame*) ----
      A warm-neutral graphite top bar and canvas, deliberately NO blue cast: the
      sibling dark theme (space-opera) owns blue gunmetal, so this chrome stays a
      true neutral grey to read as its own theme. Serious, neutral, not black. */
-  --leather:   #26252a;   /* masthead / control chrome                */
-  --leather-2: #302f35;
-  --wood:      #17161a;   /* darkest — canvas base / deep chrome       */
+  --frame:   #26252a;   /* masthead / control chrome                */
+  --frame-raised: #302f35;
+  --frame-deep:      #17161a;   /* darkest — canvas base / deep chrome       */
 
-  /* ---- Primary metal (the "brass" slots) — NEUTRAL greys ----
-     --brass-hi is the workhorse CHROME-TEXT token (column titles, counts, group
+  /* ---- Primary metal (--metal*) — NEUTRAL greys ----
+     --metal-bright is the workhorse CHROME-TEXT token (column titles, counts, group
      subheads, controls labels), so it stays a light neutral grey, NOT the accent.
      Cobalt is reserved for the true accent tokens below (focus ring, active seg,
      selected-card frame) so the one accent stays disciplined. Neutral, not blue,
      to hold the graphite identity apart from the blue sibling theme. */
-  --brass:     #949197;   /* secondary chrome text, rules, placeholders */
-  --brass-lo:  #4d4b51;   /* borders, dividers on chrome                */
-  --brass-hi:  #cbc8ce;   /* primary chrome text — light neutral grey   */
+  --metal:     #949197;   /* secondary chrome text, rules, placeholders */
+  --metal-dim:  #4d4b51;   /* borders, dividers on chrome                */
+  --metal-bright:  #cbc8ce;   /* primary chrome text — light neutral grey   */
 
-  /* ---- Parchment slots — here purely CHROME TEXT (light on dark chrome) ----
-     In this dark default the card surface is a dark elevated grey (recipe tokens
-     below), NOT these slots, so --parch* carry only chrome text: body copy, seg
-     labels, ident. They stay light. Light mode repoints them dark. */
-  --parch:      #e9e8eb;   /* primary chrome text on dark chrome        */
-  --parch-lo:   #b6b4bb;   /* secondary chrome text (seg, switch label) */
-  --parch-hi:   #f4f3f6;   /* strongest chrome text (hover, headings)   */
-  --parch-edge: rgba(255,255,255,.09);  /* hairline border on dark cards */
+  /* ---- Frame text (--frame-text*) — light on dark chrome ----
+     Body copy, seg labels, ident. The card surface is a separate dark elevated
+     grey (recipe tokens below), so frame-text is independent of it. Light mode
+     repoints these dark. */
+  --frame-text:      #e9e8eb;   /* primary chrome text on dark chrome        */
+  --frame-text-dim:   #b6b4bb;   /* secondary chrome text (seg, switch label) */
+  --frame-text-strong:   #f4f3f6;   /* strongest chrome text (hover, headings)   */
+  --border: rgba(255,255,255,.09);  /* hairline border on dark cards */
 
-  /* ---- Text on the card surface (the "ink" slots) — LIGHT on the dark card ----
+  /* ---- Text on the card surface (--text*) — LIGHT on the dark card ----
      A dark card demands light ink or it's invisible (dark-on-dark reads ~1.1:1).
      These flip to near-white on the elevated card grey; light mode flips them
      back to near-black. Each clears WCAG AA against the card surface below. */
-  --ink:       #eceaef;   /* near-white — primary reading text on card  */
-  --ink-soft:  #b3b1b9;   /* secondary text, metadata                  */
-  --ink-faint: #918f98;   /* faint text — clears AA (4.5) on the card   */
-  --ink-red:   #f2796d;   /* correction / error — readable red on dark  */
+  --text:       #eceaef;   /* near-white — primary reading text on card  */
+  --text-muted:  #b3b1b9;   /* secondary text, metadata                  */
+  --text-faint: #918f98;   /* faint text — clears AA (4.5) on the card   */
+  --alert:   #f2796d;   /* correction / error — readable red on dark  */
 
   /* ---- Tier accents (seals) — MUTED so cobalt stays the only pop ----
      Four low-saturation hues, distinct but quiet. None is a bright blue: the
@@ -97,7 +97,7 @@
   --fs-meta: 15px;
 
   /* ---- Semantic helper tokens ----
-     The accent (COBALT BLUE) lives here, not in --brass-hi (which is chrome text).
+     The accent (COBALT BLUE) lives here, not in --metal-bright (which is chrome text).
      Cobalt is the single confident corporate signal; the sibling dark theme uses
      cyan, so this is a true blue, well clear of that hue. The focus ring is a
      signature interaction — it MUST carry the accent, set explicitly. */
@@ -129,7 +129,7 @@
   --hairline-soft:     rgba(148,145,151,.20);  /* seg internal dividers         */
   --chrome-sheen:      rgba(255,255,255,.05);  /* raised-button top line        */
   --masthead-bg:       linear-gradient(180deg, rgba(255,255,255,.03), transparent 70%);
-  --masthead-rule:     linear-gradient(90deg, transparent, var(--brass-lo) 12%, var(--brass-hi) 50%, var(--brass-lo) 88%, transparent);
+  --masthead-rule:     linear-gradient(90deg, transparent, var(--metal-dim) 12%, var(--metal-bright) 50%, var(--metal-dim) 88%, transparent);
   --controls-bg:       linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.12));
   --app-bg:            #262528;
 
@@ -212,8 +212,8 @@ ledger-board {
 
 /* Scrollbars — quiet steel, thin, on the graphite chrome. */
 ::-webkit-scrollbar { width: 11px; height: 11px; }
-::-webkit-scrollbar-thumb { background: var(--brass-lo); border-radius: 6px; border: 3px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: var(--brass); background-clip: padding-box; }
+::-webkit-scrollbar-thumb { background: var(--metal-dim); border-radius: 6px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--metal); background-clip: padding-box; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,.18); }
 
 /* ============================================================================
@@ -226,26 +226,26 @@ ledger-board {
    these win without !important.
    ============================================================================ */
 :root[data-mode="light"] {
-  /* Chrome background — light neutral greys; the deepest (--wood) is the canvas
+  /* Chrome background — light neutral greys; the deepest (--frame-deep) is the canvas
      base, kept a touch cooler than the white cards so they still separate. */
-  --leather:   #f3f2f5;   /* masthead / control chrome                */
-  --leather-2: #eae9ed;
-  --wood:      #e4e3e7;   /* deepest chrome / canvas base              */
+  --frame:   #f3f2f5;   /* masthead / control chrome                */
+  --frame-raised: #eae9ed;
+  --frame-deep:      #e4e3e7;   /* deepest chrome / canvas base              */
 
-  /* Chrome text (the "parch" slots) — now DARK, on the light chrome. */
-  --parch:     #2c2b30;   /* primary chrome text (body, ident)         */
-  --parch-lo:  #56555c;   /* secondary chrome text (seg, switch label) */
-  --parch-hi:  #1b1a1e;   /* strongest chrome text (hover, headings)   */
-  --parch-edge: #dcdade;  /* hairline border on the white card         */
-  --brass:     #6c6a73;   /* secondary chrome text, rules, placeholder */
-  --brass-lo:  #cfcdd3;   /* borders / dividers on light chrome        */
-  --brass-hi:  #34333a;   /* primary chrome text — column titles/counts*/
+  /* Frame text (--frame-text*) — now DARK, on the light chrome. */
+  --frame-text:     #2c2b30;   /* primary chrome text (body, ident)         */
+  --frame-text-dim:  #56555c;   /* secondary chrome text (seg, switch label) */
+  --frame-text-strong:  #1b1a1e;   /* strongest chrome text (hover, headings)   */
+  --border: #dcdade;  /* hairline border on the white card         */
+  --metal:     #6c6a73;   /* secondary chrome text, rules, placeholder */
+  --metal-dim:  #cfcdd3;   /* borders / dividers on light chrome        */
+  --metal-bright:  #34333a;   /* primary chrome text — column titles/counts*/
 
   /* Ink on the card — flips back to near-black on the white card surface. */
-  --ink:       #232226;   /* primary reading text on the white card    */
-  --ink-soft:  #55535c;   /* secondary text, metadata                  */
-  --ink-faint: #6f6d77;   /* faint text — clears AA (4.5) on white      */
-  --ink-red:   #c0392b;   /* correction / error                        */
+  --text:       #232226;   /* primary reading text on the white card    */
+  --text-muted:  #55535c;   /* secondary text, metadata                  */
+  --text-faint: #6f6d77;   /* faint text — clears AA (4.5) on white      */
+  --alert:   #c0392b;   /* correction / error                        */
 
   /* Tiers — re-muted for the white ground (the lifted dark-mode hues glare on
      white). Matches the muted set from the light-first design. */

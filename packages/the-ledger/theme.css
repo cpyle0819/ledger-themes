@@ -8,12 +8,13 @@
 
    This is the reference theme AND the token contract every other theme fills
    in. Two token families:
-     1. NAMED tokens (--leather, --parch, --ink, --brass, --seal-*, …) — the
-        original palette. Their names are historical (leather/parchment/brass),
-        but base.css and the components treat them SEMANTICALLY: --leather is
-        "app chrome", --parch is "card surface", --ink is "text on a card",
-        --brass is "primary metal", --seal-* are "tier accents". A new theme
-        keeps the names and re-points the values.
+     1. SEMANTIC tokens (--frame, --surface, --frame-text, --text, --metal,
+        --seal-*, …) — named for ROLE, not material: --frame is the app chrome,
+        --surface is the card/panel fill, --frame-text is text on the chrome,
+        --text is text on the card, --metal is the primary metal/rule, --seal-*
+        are the tier accents. A new theme keeps the names and re-points the
+        values; because the names describe roles, an inverted theme (dark card,
+        light text) fills the same names without any becoming a misnomer.
      2. RECIPE tokens (--card-surface, --panel-surface, --grain-image,
         --deckle-filter, …) — the non-tokenizable decoration: layered
         backgrounds, textures, and the SVG edge filter. base.css and the
@@ -28,25 +29,32 @@
   --caslon: 'Libre Caslon Display', 'IM Fell English', Georgia, serif;  /* letterpress masthead face */
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
 
-  /* ---- leather & wood — the room / app chrome ---- */
-  --leather:     #2a1c10;   /* deep oxblood-brown leather        */
-  --leather-2:   #33230f;
-  --wood:        #1c1409;   /* darkest — bookshelf shadow        */
-  --brass:       #b08d4f;   /* fittings, rules, hardware         */
-  --brass-lo:    #7a5f30;
-  --brass-hi:    #d8b878;
+  /* ---- frame — the room / app chrome (leather & wood) ---- */
+  --frame:     #2a1c10;   /* deep oxblood-brown leather        */
+  --frame-raised:   #33230f;
+  --frame-deep:        #1c1409;   /* darkest — bookshelf shadow        */
+  --metal:       #b08d4f;   /* fittings, rules, hardware         */
+  --metal-dim:    #7a5f30;
+  --metal-bright:    #d8b878;
 
-  /* ---- parchment — the card / panel surface ---- */
-  --parch:       #e8dbba;   /* aged leaf                         */
-  --parch-lo:    #d8c69c;   /* shadowed / older leaf             */
-  --parch-hi:    #f3ead0;   /* fresh, lit leaf                   */
-  --parch-edge:  #c4ac7c;   /* torn/burnt edge                   */
+  /* ---- parchment — the card / panel / sheet surface fill ---- */
+  --surface:        #e8dbba;   /* aged leaf                         */
+  --surface-dim:    #d8c69c;   /* shadowed / older leaf             */
+  --surface-bright: #f3ead0;   /* fresh, lit leaf                   */
 
-  /* ---- ink — text on the card surface ---- */
-  --ink:         #33291a;   /* iron-gall brown-black             */
-  --ink-soft:    #5b4a30;
-  --ink-faint:   #6f5c3e;   /* darkened to clear WCAG AA (4.5) on parchment */
-  --ink-red:     #8f2f22;   /* rubric red / correction ink       */
+  /* ---- text on the dark frame (body copy, control labels on the leather).
+     In this theme the on-frame text IS the parchment leaf, so it shares the
+     surface values; an inverted theme points these light against a dark plate. ---- */
+  --frame-text:        var(--surface);
+  --frame-text-dim:    var(--surface-dim);
+  --frame-text-strong: var(--surface-bright);
+  --border:  #c4ac7c;   /* torn/burnt edge                   */
+
+  /* ---- text on the card surface (iron-gall ink) ---- */
+  --text:         #33291a;   /* iron-gall brown-black             */
+  --text-muted:    #5b4a30;
+  --text-faint:   #6f5c3e;   /* darkened to clear WCAG AA (4.5) on parchment */
+  --alert:     #8f2f22;   /* rubric red / correction ink       */
 
   /* ---- tier accents (seals) ---- */
   --seal-epic:   #8a5a2b;   /* burnt sienna — EPIC               */
@@ -64,10 +72,10 @@
   --fs-meta: 16px;
 
   /* ---- Semantic helper tokens (base.css reads these) ---- */
-  --focus-ring:        var(--brass-hi);      /* keyboard ring on dark chrome  */
-  --focus-ring-onlight: var(--ink-red);      /* ring on the light card fill   */
-  --skip-bg:           var(--brass-hi);
-  --skip-fg:           var(--wood);
+  --focus-ring:        var(--metal-bright);      /* keyboard ring on dark chrome  */
+  --focus-ring-onlight: var(--alert);      /* ring on the light card fill   */
+  --skip-bg:           var(--metal-bright);
+  --skip-fg:           var(--frame-deep);
   --btn-hover-fg:      #fff;
   --chip-fg:           #f6eed6;               /* text on a filled tier chip    */
   --inert:             rgba(74,78,86,.8);     /* abandoned / not-done grey     */
@@ -82,8 +90,8 @@
   --closed-edge:       rgba(140,43,34,.55);
   --abandoned-ink:     rgba(74,78,86,.9);
   --abandoned-edge:    rgba(74,78,86,.5);
-  --seg-on-fg:         var(--wood);
-  --seg-on-bg:         linear-gradient(180deg, var(--brass-hi), var(--brass));
+  --seg-on-fg:         var(--frame-deep);
+  --seg-on-bg:         linear-gradient(180deg, var(--metal-bright), var(--metal));
 
   /* ---- Chrome seams: the wells, hairlines, and sheen of the dark chrome ----
      Warm-black inset wells (inputs, segs), brass hairline dividers, and the thin
@@ -97,7 +105,7 @@
 
   /* ---- Panel surface (outline epic cards, drawer, compose, toast) ---- */
   --panel-radius:      3px;
-  --panel-surface:     linear-gradient(180deg, var(--parch-hi), var(--parch));
+  --panel-surface:     linear-gradient(180deg, var(--surface-bright), var(--surface));
   --panel-head-wash:   linear-gradient(90deg, rgba(138,90,43,.17), transparent 48%);
 
   /* ---- Large sheet surfaces (drawer, compose, about) ----
@@ -106,11 +114,11 @@
      brass border that binds the sheet. */
   --sheet-surface:
     radial-gradient(120% 60% at 100% 0%, rgba(196,172,124,.35), transparent 60%),
-    linear-gradient(180deg, var(--parch-hi), var(--parch) 70%, var(--parch-lo));
+    linear-gradient(180deg, var(--surface-bright), var(--surface) 70%, var(--surface-dim));
   --sheet-surface-tl:
     radial-gradient(120% 55% at 0% 0%, rgba(196,172,124,.35), transparent 60%),
-    linear-gradient(180deg, var(--parch-hi), var(--parch) 70%, var(--parch-lo));
-  --sheet-edge:        var(--brass-lo);
+    linear-gradient(180deg, var(--surface-bright), var(--surface) 70%, var(--surface-dim));
+  --sheet-edge:        var(--metal-dim);
 
   /* ---- Card surface recipe (the <ledger-card> parchment leaf) ----
      A layered stack: a soft stain radial, the paper-stain texture, and the
@@ -120,13 +128,13 @@
   --card-surface:
     radial-gradient(120px 80px at 82% 14%, rgba(120,80,40,.10), transparent 70%),
     url("./paper-stain.svg"),
-    linear-gradient(180deg, var(--parch-hi), var(--parch) 60%, var(--parch-lo));
+    linear-gradient(180deg, var(--surface-bright), var(--surface) 60%, var(--surface-dim));
   --card-surface-size: auto, 360px 260px, auto;
   --card-surface-blend: multiply, multiply, normal;
   --card-surface-selected:
     radial-gradient(120px 80px at 82% 14%, rgba(120,80,40,.10), transparent 70%),
     url("./paper-stain.svg"),
-    linear-gradient(180deg, var(--parch-hi), var(--parch-hi) 55%, var(--parch));
+    linear-gradient(180deg, var(--surface-bright), var(--surface-bright) 55%, var(--surface));
   --card-shadow:        1px 2px 4px rgba(0,0,0,.22), inset 0 0 30px rgba(160,120,60,.06), inset 0 0 0 1px rgba(196,172,124,.5);
   --card-shadow-hover:  2px 4px 9px rgba(0,0,0,.3), inset 0 0 30px rgba(160,120,60,.08), inset 0 0 0 1px rgba(196,172,124,.6);
   --card-shadow-selected: 2px 4px 12px rgba(0,0,0,.34), inset 0 0 34px rgba(160,120,60,.16);
@@ -176,6 +184,6 @@ ledger-board {
 /* scrollbars — aged brass (light-DOM scrollers; shadow scrollers get the
    matching constructable sheet in shared-styles.ts). */
 ::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-thumb { background: var(--brass-lo); border-radius: 0; border: 3px solid var(--wood); }
-::-webkit-scrollbar-thumb:hover { background: var(--brass); }
+::-webkit-scrollbar-thumb { background: var(--metal-dim); border-radius: 0; border: 3px solid var(--frame-deep); }
+::-webkit-scrollbar-thumb:hover { background: var(--metal); }
 ::-webkit-scrollbar-track { background: rgba(20,14,7,.5); }

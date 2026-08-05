@@ -20,34 +20,32 @@
   --gara: 'Barlow Semi Condensed', 'Segoe UI', system-ui, sans-serif; /* body / rows */
   --mono: 'Share Tech Mono', ui-monospace, Menlo, Consolas, monospace;
 
-  /* ---- Hull & chrome — the ship (the "leather"/"wood" slots) ---- */
-  --leather:   #1c2531;   /* gunmetal panel face                */
-  --leather-2: #232e3c;
-  --wood:      #0d131b;   /* darkest — hull shadow / recess      */
+  /* ---- Hull & chrome — the ship (--frame*) ---- */
+  --frame:   #1c2531;   /* gunmetal panel face                */
+  --frame-raised: #232e3c;
+  --frame-deep:      #0d131b;   /* darkest — hull shadow / recess      */
 
-  /* ---- Primary metal + phosphor readout (the "brass" slots) ----
+  /* ---- Primary metal + phosphor readout (--metal*) ----
      brass-hi is the bright readout accent = phosphor cyan; the mids are dim
      steel so hardware reads cool, not warm. */
-  --brass:     #5f7d8a;   /* steel rule / hardware               */
-  --brass-lo:  #3a4d59;   /* dim steel edge                      */
-  --brass-hi:  #58d7e6;   /* phosphor cyan — lit readout/heading */
+  --metal:     #5f7d8a;   /* steel rule / hardware               */
+  --metal-dim:  #3a4d59;   /* dim steel edge                      */
+  --metal-bright:  #58d7e6;   /* phosphor cyan — lit readout/heading */
 
-  /* ---- The "parchment" slots — here they are LIGHT chrome text, NOT the card
-     surface. base.css uses --parch* for body/control/input text on the dark
-     hull, so these must stay light or that text goes dark-on-dark (the collision
-     that broke the first cut). The DARK data-plate surface is defined by the
-     recipe tokens below (--card-surface / --panel-surface / --sheet-surface) with
-     literal plate colours, decoupled from these text tokens. ---- */
-  --parch:      #cbd6e0;   /* primary light text on dark chrome    */
-  --parch-lo:   #a4b2c0;   /* dimmer chrome text (seg rest, hints) */
-  --parch-hi:   #e8eff5;   /* brightest chrome text (focused input)*/
-  --parch-edge: #5c7284;   /* machined edge / rivet line (≥3:1 on hull) */
+  /* ---- Text on the dark hull (--frame-text*) — light readout text. The card
+     surface is a separate dark data-plate (--card-surface / --panel-surface /
+     --sheet-surface below, literal plate colours), so frame-text stays light
+     against the hull independent of the plate. ---- */
+  --frame-text:      #cbd6e0;   /* primary light text on dark chrome    */
+  --frame-text-dim:   #a4b2c0;   /* dimmer chrome text (seg rest, hints) */
+  --frame-text-strong:   #e8eff5;   /* brightest chrome text (focused input)*/
+  --border: #5c7284;   /* machined edge / rivet line (≥3:1 on hull) */
 
-  /* ---- Readout text on the data-plate (the "ink" slots) — LIGHT ---- */
-  --ink:       #dbe4ec;   /* primary readout                      */
-  --ink-soft:  #aab8c6;   /* meta — clears AA on the plate         */
-  --ink-faint: #8fa0b0;   /* dimmed label — clears AA (4.5) on plate */
-  --ink-red:   #f2ad44;   /* amber accession/readout accent (№, counts) */
+  /* ---- Readout text on the data-plate (--text*) — LIGHT ---- */
+  --text:       #dbe4ec;   /* primary readout                      */
+  --text-muted:  #aab8c6;   /* meta — clears AA on the plate         */
+  --text-faint: #8fa0b0;   /* dimmed label — clears AA (4.5) on plate */
+  --alert:   #f2ad44;   /* amber accession/readout accent (№, counts) */
 
   /* ---- Tier labels (backlit "seals") — darkened so the light chip text
      (--chip-fg) clears 4.5:1 on each. ---- */
@@ -64,9 +62,9 @@
   --fs-meta: 16px;
 
   /* ---- Semantic helpers ---- */
-  --focus-ring:         var(--brass-hi);   /* cyan ring on dark chrome           */
+  --focus-ring:         var(--metal-bright);   /* cyan ring on dark chrome           */
   --focus-ring-onlight: #f0a838;           /* the plate is dark → amber ring reads on it */
-  --skip-bg:            var(--brass-hi);
+  --skip-bg:            var(--metal-bright);
   --skip-fg:            #071016;
   --btn-hover-fg:       #eafcff;
   --chip-fg:            #e9f6f9;            /* cool-white text on a backlit tier chip */
@@ -83,7 +81,7 @@
   --abandoned-ink:      rgba(140,152,164,.92);
   --abandoned-edge:     rgba(140,152,164,.5);
   --seg-on-fg:          #07141a;                /* dark text on the lit cyan seg  */
-  --seg-on-bg:          linear-gradient(180deg, var(--brass-hi), #2f9fb0);
+  --seg-on-bg:          linear-gradient(180deg, var(--metal-bright), #2f9fb0);
 
   /* ---- Chrome seams ---- */
   --well:          rgba(0,0,0,.4);          /* input / seg / select well          */
@@ -92,11 +90,11 @@
   --hairline-soft: rgba(88,215,230,.14);    /* seg internal dividers              */
   --chrome-sheen:  rgba(140,225,235,.16);   /* raised-button top edge glow        */
   --masthead-bg:   linear-gradient(180deg, rgba(88,215,230,.05), transparent 70%);
-  --masthead-rule: linear-gradient(90deg, transparent, var(--brass-lo) 10%, var(--brass-hi) 50%, var(--brass-lo) 90%, transparent);
+  --masthead-rule: linear-gradient(90deg, transparent, var(--metal-dim) 10%, var(--metal-bright) 50%, var(--metal-dim) 90%, transparent);
   --controls-bg:   linear-gradient(180deg, rgba(9,14,20,.72), rgba(6,10,15,.55));
 
   /* ---- Data-plate surface literals — the DARK metal the cards/panels/sheets are
-     built from. Separate from --parch* (which is light chrome text now). ---- */
+     built from. Separate from --frame-text* (which is light chrome text now). ---- */
   --plate:      #28323e;   /* plate face                         */
   --plate-lo:   #1f2833;   /* shadowed lower plate               */
   --plate-hi:   #32404e;   /* lit upper plate                    */
@@ -107,11 +105,11 @@
   --panel-head-wash: linear-gradient(90deg, rgba(88,215,230,.10), transparent 52%);
   --sheet-surface:   linear-gradient(180deg, var(--plate-hi), var(--plate) 72%, var(--plate-lo));
   --sheet-surface-tl: linear-gradient(180deg, var(--plate-hi), var(--plate) 72%, var(--plate-lo));
-  --sheet-edge:      var(--brass-lo);
+  --sheet-edge:      var(--metal-dim);
 
   /* ---- Editable-field + inset surfaces (drawer/compose/comment inputs, the
      contains box, card-act/copy hover chip). base.css bakes these light; on the
-     dark plate they must be dark wells so the light --ink text stays readable. ---- */
+     dark plate they must be dark wells so the light --text text stays readable. ---- */
   --field-bg:        rgba(0,0,0,.28);        /* input rest — a recessed dark well */
   --field-bg-focus:  rgba(0,0,0,.4);         /* focused — deeper, cyan border adds the lift */
   --field-edge:      #6b8296;                /* machined field border (≥3:1 on plate) */
@@ -186,6 +184,6 @@ ledger-board {
 
 /* Scrollbars — dim steel with a cyan-lit thumb hover. */
 ::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-thumb { background: var(--brass-lo); border-radius: 0; border: 3px solid var(--wood); }
-::-webkit-scrollbar-thumb:hover { background: var(--brass-hi); }
+::-webkit-scrollbar-thumb { background: var(--metal-dim); border-radius: 0; border: 3px solid var(--frame-deep); }
+::-webkit-scrollbar-thumb:hover { background: var(--metal-bright); }
 ::-webkit-scrollbar-track { background: rgba(6,10,15,.6); }
