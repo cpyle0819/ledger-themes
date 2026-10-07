@@ -141,10 +141,8 @@ ledger-drawer[open]::part(panel) { border-left-width: 2px; box-shadow: -12px 0 3
   font: 12px/1.5 var(--gara); letter-spacing: .02em; }
 .mast-sub em { color: #eee5c9; }
 .mast-right { gap: 8px; flex-shrink: 0; }
-.ident { margin: 0; min-height: 32px; padding: 0 10px 0 0; gap: 7px;
+.ident { margin: 0; min-height: 32px; padding: 0 12px; gap: 7px;
   border-radius: 18px; font: 12px var(--gara); background: #183646; }
-.ident:has(ledger-avatar[hidden]) { padding-left: 10px; }
-ledger-avatar { --frame: #183646; --metal-dim: #bba16c; }
 .ghost-btn, .theme-select { min-height: 32px; padding: 6px 10px; font-size: 12px; border-radius: 6px; }
 .ghost-btn.icon-btn { width: 32px; font-size: 14px; }
 .controls { padding: 10px 26px; gap: 20px; flex-wrap: wrap; }
