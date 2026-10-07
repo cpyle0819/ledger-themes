@@ -16,6 +16,7 @@ web components (logo, ambient). See The Ledger's `CLAUDE.md` for the token contr
 | [`@cpyle0819/ledger-theme-the-ledger`](packages/the-ledger) | The Ledger | Leather, parchment, brass, wax seal — the reference theme. |
 | [`@cpyle0819/ledger-theme-space-opera`](packages/space-opera) | Space Opera | Gunmetal data-plates, phosphor-cyan readouts, amber warnings — Expanse-cold. |
 | [`@cpyle0819/ledger-theme-professional`](packages/professional) | Professional | Graphite chrome, crisp white cards, IBM Plex type, one cobalt accent — corporate-clean. Dark by default with a light mode in the gear. |
+| [`@cpyle0819/ledger-theme-earendil`](packages/earendil) | Eärendil | Ink-blue header, warm paper, brass rules, Georgia headings, and a compass star. |
 
 ## Using a theme
 
@@ -41,3 +42,7 @@ npm publish --workspaces --access public   # publish every package (or use npm r
 Publish a single theme with `npm publish -w @cpyle0819/ledger-theme-space-opera`.
 Scoped packages are private by default on npm, so each package sets
 `publishConfig.access: "public"`.
+
+For local Eärendil development, keep the repositories beside each other and run
+`npm install ../ledger-themes/packages/earendil` from The Ledger. Select Eärendil
+in the theme menu, or set `"theme": "earendil"` in `ledger.config.json`.

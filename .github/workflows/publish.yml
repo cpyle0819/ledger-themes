@@ -19,6 +19,7 @@ on:
       - 'the-ledger-v*'
       - 'space-opera-v*'
       - 'professional-v*'
+      - 'earendil-v*'
 
 jobs:
   publish:
@@ -50,6 +51,7 @@ jobs:
             the-ledger-v*)   echo "dir=packages/the-ledger"   >> "$GITHUB_OUTPUT" ;;
             space-opera-v*)  echo "dir=packages/space-opera"  >> "$GITHUB_OUTPUT" ;;
             professional-v*) echo "dir=packages/professional" >> "$GITHUB_OUTPUT" ;;
+            earendil-v*) echo "dir=packages/earendil" >> "$GITHUB_OUTPUT" ;;
             *) echo "Tag ${GITHUB_REF_NAME} matches no known package" >&2; exit 1 ;;
           esac
 

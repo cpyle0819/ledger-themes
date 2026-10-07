@@ -1,0 +1,175 @@
+/* Eärendil: a paper atlas beneath an ink-blue sky. All fonts are local. */
+:root {
+  color-scheme: light;
+  --fell: Georgia, 'Times New Roman', serif;
+  --fell-sc: Georgia, 'Times New Roman', serif;
+  --gara: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --frame: #142f40;
+  --frame-raised: #21485b;
+  --frame-deep: #102735;
+  --frame-text: #f8f4e9;
+  --frame-text-dim: #c4d1d6;
+  --frame-text-strong: #fffefa;
+  --metal: #c4b28a;
+  --metal-dim: #62777d;
+  --metal-bright: #eee5c9;
+  --surface: #fdfcf8;
+  --surface-dim: #eee9dc;
+  --surface-bright: #fffefa;
+  --border: #bcc9cf;
+  --text: #243744;
+  --text-muted: #506a78;
+  --text-faint: #5c7079;
+  --alert: #a33e32;
+  --seal-epic: #71618b;
+  --seal-story: #397360;
+  --seal-task: #276c89;
+  --seal-bug: #a33e32;
+  --wax: #a33e32;
+  --risk-over: #a33e32;
+  --risk-under: #866322;
+  --focus-ring: #eee5c9;
+  --focus-ring-onlight: #276c89;
+  --skip-bg: #eee5c9;
+  --skip-fg: #142f40;
+  --btn-hover-fg: #fffefa;
+  --chip-fg: #fffefa;
+  --inert: #718894;
+  --accent-warm: #e0c58e;
+  --accent-warm-faint: #bba16c66;
+  --hover-wash: #ffffff12;
+  --row-hover: #276c890c;
+  --copy-hover-bg: #276c8914;
+  --onlight-btn-bg: #276c8910;
+  --switch-on-2: #397360;
+  --closed-ink: #9a493ccc;
+  --closed-edge: #9a493c88;
+  --abandoned-ink: #62777dcc;
+  --abandoned-edge: #62777d88;
+  --seg-on-fg: #142f40;
+  --seg-on-bg: #eee5c9;
+  --well: #102735;
+  --well-soft: #ffffff06;
+  --hairline: #bba16c55;
+  --hairline-soft: #81979e55;
+  --chrome-sheen: #ffffff09;
+  --masthead-bg: #142f40;
+  --masthead-rule: linear-gradient(90deg, #a58b56, #eee5c9 45%, #a58b56);
+  --controls-bg: #193b4b;
+  --app-bg: #f4f1e9;
+  --panel-radius: 4px;
+  --panel-surface: #fdfcf8;
+  --panel-head-wash: linear-gradient(100deg, #eee9dc, #fffefa);
+  --sheet-surface: #fdfcf8;
+  --sheet-surface-tl: #fffefa;
+  --sheet-edge: #bba16c;
+  --card-surface: #fffefa;
+  --card-surface-size: auto;
+  --card-surface-blend: normal;
+  --card-surface-selected: #fffefa;
+  --card-shadow: 0 2px 4px #2437440a, inset 0 0 0 1px #bcc9cf;
+  --card-shadow-hover: 0 4px 12px #24374414, inset 0 0 0 1px #718894;
+  --card-shadow-selected: 0 4px 14px #276c891c;
+  --card-radius: 4px;
+  --control-radius: 6px;
+  --deckle-filter: none;
+  --deckle-filter-selected: none;
+  --card-frame: #276c89 1;
+  --card-frame-filter: none;
+  --card-frame-seat: inset 0 0 0 1px #276c89;
+  --card-frame-shadow: inset 0 0 0 2px #276c89;
+  --stamp-ink: var(--closed-ink);
+  --stamp-edge: var(--closed-edge);
+  --stamp-ink-abandoned: var(--abandoned-ink);
+  --stamp-edge-abandoned: var(--abandoned-edge);
+  --stamp-filter: none;
+  --card-recede: saturate(.72);
+  --card-recede-opacity: .72;
+  --card-recede-hover: saturate(1);
+  --field-bg: #fffefa;
+  --field-bg-focus: #ffffff;
+  --field-edge: #bcc9cf;
+  --inset-bg: #f4f1e9;
+  --onlight-chip-bg: #276c8910;
+  --card-act-bg: #fffefa;
+}
+
+ledger-board {
+  background: url('./chart.svg') right 24px bottom 20px / 480px 320px no-repeat,
+    radial-gradient(#bdc8cb77 .7px, transparent .7px) 0 0 / 20px 20px, #f4f1e9;
+}
+.grain, .vignette { opacity: 0; }
+.masthead::after { box-shadow: none; }
+.mast-sub { color: #c4d1d6; }
+.ident, .ghost-btn, .theme-select { box-shadow: none; }
+.ghost-btn, .theme-select, .ctl > .ctl-label { font-family: var(--gara); font-style: normal; }
+.theme-select option, .ctl-select option { background: #fffefa; color: #243744; }
+
+/* Canvas chrome uses dark ink; the masthead retains its light-on-blue tokens. */
+.stage {
+  --frame-text: #243744;
+  --frame-text-dim: #506a78;
+  --frame-text-strong: #142f40;
+  --metal: #657c85;
+  --metal-dim: #c6c5b8;
+  --metal-bright: #344c5a;
+  --focus-ring: #276c89;
+  --accent-warm: #276c89;
+  --accent-warm-faint: #276c8940;
+}
+ledger-column { background: transparent; }
+ledger-column::part(head) { background: #f4f1e9e8; border-bottom-color: #bba16c; }
+ledger-column::part(heading) { font-style: italic; letter-spacing: .01em; text-shadow: none; }
+ledger-column::part(add) { color: #eee5c9; }
+::-webkit-scrollbar-thumb { background: #a3b2b6; }
+::-webkit-scrollbar-thumb:hover { background: #718894; }
+::-webkit-scrollbar-track { background: #24374408; }
+
+/* Closed overlays cast no shadow onto the paper workspace. */
+ledger-drawer:not([open])::part(panel),
+ledger-terminal:not([open])::part(panel) { box-shadow: none; }
+ledger-drawer[open]::part(panel) { border-left-width: 2px; box-shadow: -12px 0 32px #24374426; }
+.ol-epic, .ol-orphans { box-shadow: 0 2px 8px #24374412; }
+
+/* A 72px masthead matches the atlas apps; the log caption sits beside the brand. */
+.masthead { min-height: 72px; padding: 0 26px; align-items: center; gap: 24px; border-bottom-width: 1px; }
+.masthead::after { height: 1px; bottom: -1px; }
+.mast-left { display: flex; align-items: center; gap: 24px; min-width: 0; }
+.ledger-title { height: 40px; }
+.mast-sub { margin: 0; padding-left: 24px; border-left: 1px solid #536976;
+  font: 12px/1.5 var(--gara); letter-spacing: .02em; }
+.mast-sub em { color: #eee5c9; }
+.mast-right { gap: 8px; flex-shrink: 0; }
+.ident { margin: 0; min-height: 32px; padding: 0 10px 0 0; gap: 7px;
+  border-radius: 18px; font: 12px var(--gara); background: #183646; }
+.ident:has(ledger-avatar[hidden]) { padding-left: 10px; }
+ledger-avatar { --frame: #183646; --metal-dim: #bba16c; }
+.ghost-btn, .theme-select { min-height: 32px; padding: 6px 10px; font-size: 12px; border-radius: 6px; }
+.ghost-btn.icon-btn { width: 32px; font-size: 14px; }
+.controls { padding: 10px 26px; gap: 20px; flex-wrap: wrap; }
+.ctl { gap: 8px; }
+.ctl > .ctl-label { font-size: 12px; }
+.seg, .ctl-select, .ctl-search { border-radius: 6px; }
+.seg button, .seg input, .ctl-select, .ctl-search { font-size: 13px; padding: 6px 10px; }
+.seg input { width: 90px; }
+.ctl-search { width: 180px; }
+.theme-select:focus-visible, .ctl-select:focus-visible, .ctl-search:focus-visible {
+  outline: 2px solid var(--focus-ring); outline-offset: 2px;
+}
+
+/* Navigation wraps while the chart scrolls within its own stage. */
+@media (max-width: 1100px) {
+  .mast-sub { display: none; }
+  .stage > .columns { overflow-x: auto; }
+}
+@media (max-width: 600px) {
+  .masthead { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+  .ledger-title { height: 36px; }
+  .mast-right { flex-wrap: wrap; }
+  .controls { padding: 10px 16px; gap: 10px 16px; }
+  .ctl { max-width: 100%; }
+  .ctl.grow { flex-wrap: wrap; }
+  .ctl-select { max-width: 230px; }
+  .stage > .columns { grid-template-columns: repeat(3, minmax(320px, 85vw)); }
+}
